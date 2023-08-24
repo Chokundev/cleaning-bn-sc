@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <base target="_top">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.15/dist/tailwind.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.4/dist/sweetalert2.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.3/dist/sweetalert2.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.3/dist/sweetalert2.all.min.js"></script>
+</head>
+
+<body class="bg-gray-100">
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Thai&display=swap');
+
+        * {
+            font-family: 'Noto Sans Thai', sans-serif;
+        }
+    </style>
+
+    <div class="container mx-auto py-8">
+        
+        <div class="bg-white shadow rounded-lg p-6">
+            <h1 class="text-2xl font-semibold mb-4"><strong>ระบบจัดการ</strong> โครงการห้องเรียนสีขาว</h1>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                
+                <div class="bg-blue-100 p-4 rounded-lg">
+                    <h2 class="text-lg font-semibold mb-2">ชั้นมัธยมศึกษาปีที่ 1/1</h2>
+                    <p class="text-gray-600">ตรวจแล้วทั้งหมด : <strong id="point1">0</strong> ครั้ง</p> <br>
+                    <button class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded"
+                        onclick="run1()">
+                        แจ้งให้ทราบ !!
+                    </button>
+                </div>
+                <div class="bg-blue-100 p-4 rounded-lg">
+                    <h2 class="text-lg font-semibold mb-2">ชั้นมัธยมศึกษาปีที่ 2/1</h2>
+                    <p class="text-gray-600">ตรวจแล้วทั้งหมด : <strong id="point2">0</strong> ครั้ง</p> <br>
+                    <button class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded"
+                        onclick="run2()">
+                        แจ้งให้ทราบ !!
+                    </button>
+                </div>
+                <div class="bg-blue-100 p-4 rounded-lg">
+                    <h2 class="text-lg font-semibold mb-2">ชั้นมัธยมศึกษาปีที่ 2/2</h2>
+                    <p class="text-gray-600">ตรวจแล้วทั้งหมด : <strong id="point3">0</strong> ครั้ง</p> <br>
+                    <button class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded"
+                        onclick="run3()">
+                        แจ้งให้ทราบ !!
+                    </button>
+                </div>
+                <!-- Add more data records -->
+                <div class="bg-blue-100 p-4 rounded-lg">
+                    <h2 class="text-lg font-semibold mb-2">ชั้นมัธยมศึกษาปีที่ 3/1</h2>
+                    <p class="text-gray-600">ตรวจแล้วทั้งหมด : <strong id="point4">0</strong> ครั้ง</p> <br>
+                    <button class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded"
+                        onclick="run4()">
+                        แจ้งให้ทราบ !!
+                    </button>
+                </div>
+                <div class="bg-blue-100 p-4 rounded-lg">
+                    <h2 class="text-lg font-semibold mb-2">ชั้นมัธยมศึกษาปีที่ 3/2</h2>
+                    <p class="text-gray-600">ตรวจแล้วทั้งหมด : <strong id="point5">0</strong> ครั้ง</p> <br>
+                    <button class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded"
+                        onclick="run5()">
+                        แจ้งให้ทราบ !!
+                    </button>
+                </div>
+                <div class="bg-blue-100 p-4 rounded-lg">
+                    <h2 class="text-lg font-semibold mb-2">ชั้นมัธยมศึกษาปีที่ 4/1</h2>
+                    <p class="text-gray-600">ตรวจแล้วทั้งหมด : <strong id="point6">0</strong> ครั้ง</p> <br>
+                    <button class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded"
+                        onclick="run6()">
+                        แจ้งให้ทราบ !!
+                    </button>
+                </div>
+                <div class="bg-blue-100 p-4 rounded-lg">
+                    <h2 class="text-lg font-semibold mb-2">ชั้นมัธยมศึกษาปีที่ 4/2</h2>
+                    <p class="text-gray-600">ตรวจแล้วทั้งหมด : <strong id="point7">0</strong> ครั้ง</p> <br>
+                    <button class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded"
+                        onclick="run7()">
+                        แจ้งให้ทราบ !!
+                    </button>
+                </div>
+                <div class="bg-blue-100 p-4 rounded-lg">
+                    <h2 class="text-lg font-semibold mb-2">ชั้นมัธยมศึกษาปีที่ 5/1</h2>
+                    <p class="text-gray-600">ตรวจแล้วทั้งหมด : <strong id="point8">0</strong> ครั้ง</p> <br>
+                    <button class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded"
+                        onclick="run8()">
+                        แจ้งให้ทราบ !!
+                    </button>
+                </div>
+                <div class="bg-blue-100 p-4 rounded-lg">
+                    <h2 class="text-lg font-semibold mb-2">ชั้นมัธยมศึกษาปีที่ 5/2</h2>
+                    <p class="text-gray-600">ตรวจแล้วทั้งหมด : <strong id="point9">0</strong> ครั้ง</p> <br>
+                    <button class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded"
+                        onclick="run9()">
+                        แจ้งให้ทราบ !!
+                    </button>
+                </div>
+                <div class="bg-blue-100 p-4 rounded-lg">
+                    <h2 class="text-lg font-semibold mb-2">ชั้นมัธยมศึกษาปีที่ 6/1</h2>
+                    <p class="text-gray-600">ตรวจแล้วทั้งหมด : <strong id="point10">0</strong> ครั้ง</p> <br>
+                    <button class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded"
+                        onclick="run10()">
+                        แจ้งให้ทราบ !!
+                    </button>
+                </div>
+                <div class="bg-blue-100 p-4 rounded-lg">
+                    <h2 class="text-lg font-semibold mb-2">ชั้นมัธยมศึกษาปีที่ 6/2</h2>
+                    <p class="text-gray-600">ตรวจแล้วทั้งหมด : <strong id="point11">0</strong> ครั้ง</p> <br>
+                    <button class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded"
+                        onclick="run11()">
+                        แจ้งให้ทราบ !!
+                    </button>
+                </div>
+
+                <button class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded"
+                    onclick="runScript()">
+                    รายงานผลคะแนน ประจำวัน !!
+                </button>
+            </div>
+        </div>
+    </div>
+    <footer style="text-align: center;">
+        2023 &copy; ธีรชานนท์ พวงเงิน ผู้ดูแลระบบโครงการห้องเรียนสีขาว
+    </footer>
+
+    <script>
+        function runScript() {
+            Swal.fire(
+                'แจ้งเตือน!',
+                'รายงานผลคะแนนสำเร็จ',
+                'success'
+            )
+            google.script.run.main();
+        }
+
+        function run1() {
+            Swal.fire(
+                'แจ้งเตือน!',
+                'แจ้งเตือนสำเร็จ',
+                'success'
+            )
+            google.script.run.sendline1();
+        }
+
+
+        function run2() {
+            Swal.fire(
+                'แจ้งเตือน!',
+                'แจ้งเตือนสำเร็จ',
+                'success'
+            )
+            google.script.run.sendline2();
+        }
+        function run3() {
+            Swal.fire(
+                'แจ้งเตือน!',
+                'แจ้งเตือนสำเร็จ',
+                'success'
+            )
+            google.script.run.sendline3();
+        }
+        function run4() {
+            Swal.fire(
+                'แจ้งเตือน!',
+                'แจ้งเตือนสำเร็จ',
+                'success'
+            )
+            google.script.run.sendline4();
+        }
+        function run5() {
+            Swal.fire(
+                'แจ้งเตือน!',
+                'แจ้งเตือนสำเร็จ',
+                'success'
+            )
+            google.script.run.sendline5();
+        }
+        function run6() {
+            Swal.fire(
+                'แจ้งเตือน!',
+                'แจ้งเตือนสำเร็จ',
+                'success'
+            )
+            google.script.run.sendline6();
+        }
+        function run7() {
+            Swal.fire(
+                'แจ้งเตือน!',
+                'แจ้งเตือนสำเร็จ',
+                'success'
+            )
+            google.script.run.sendline7();
+        }
+        function run8() {
+            Swal.fire(
+                'แจ้งเตือน!',
+                'แจ้งเตือนสำเร็จ',
+                'success'
+            )
+            google.script.run.sendline8();
+        }
+
+        function run9() {
+            Swal.fire(
+                'แจ้งเตือน!',
+                'แจ้งเตือนสำเร็จ',
+                'success'
+            )
+            google.script.run.sendline9();
+        }
+
+        function run10() {
+            Swal.fire(
+                'แจ้งเตือน!',
+                'แจ้งเตือนสำเร็จ',
+                'success'
+            )
+            google.script.run.sendline10();
+        }
+
+        function run11() {
+            Swal.fire(
+                'แจ้งเตือน!',
+                'แจ้งเตือนสำเร็จ',
+                'success'
+            )
+            google.script.run.sendline11();
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+
+            setInterval(function () {
+                let point1 = document.getElementById('point1');
+
+                let point2 = document.getElementById('point2');
+
+                let point3 = document.getElementById('point3');
+
+                let point4 = document.getElementById('point4');
+
+                let point5 = document.getElementById('point5');
+
+                let point6 = document.getElementById('point6');
+
+                let point7 = document.getElementById('point7');
+
+                let point8 = document.getElementById('point8');
+
+                let point9 = document.getElementById('point9');
+
+                let point10 = document.getElementById('point10');
+
+                let point11 = document.getElementById('point11');
+
+                google.script.run
+                    .withSuccessHandler(data => {
+                        point1.innerHTML = data[0];
+                        point2.innerHTML = data[1];
+                        point3.innerHTML = data[2];
+                        point4.innerHTML = data[3];
+                        point5.innerHTML = data[4];
+                        point6.innerHTML = data[5];
+                        point7.innerHTML = data[6];
+                        point8.innerHTML = data[7];
+                        point9.innerHTML = data[8];
+                        point10.innerHTML = data[9];
+                        point11.innerHTML = data[10];
+
+                    })
+                    .setAutomatically();
+            }, 1000)
+        })
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <base target="_top">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.6.0.js"
+        integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+        integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@400&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@300&display=swap');
+
+        body {
+            font-family: 'Chakra Petch', sans-serif;
+        }
+
+        a {
+            color: #000;
+            text-decoration: none;
+        }
+    </style>
+
+</head>
+
+<body>
+    <section id="page1">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 mx-auto  p-2 mt-2 bg-body border rounded">
+                    <center>
+                        <img src="https://drive.google.com/uc?id=1RULiaFUBuAO-eNSflH2Zu9tF-i0IzUVU" width="30%">
+                        <h1 style="font-size:20px;"><strong>ระบบบันทึกการตรวจความสะอาดห้องเรียน</strong></h1> <br>
+                        <h6 style="font-size:14px;"><strong>ประจำเดือน : สิงหาคม</strong></h6> <br />
+                        <h6 style="font-size:12px;">สำหรับคณะกรรมการนักเรียนและคณะกรรมการตรวจห้องเท่านั้น</h6>
+                    </center>
+                    <!-- ## SEARCH FORM ------------------------------------------------ -->
+                    <form id="search-form" style="margin-top:10px;" onsubmit="handleFormSubmit(this)">
+                        <div class="mb-3">
+                            <input type="text" style="text-align: center;" class="form-control col-sm-6" id="searchtext"
+                                name="searchtext" placeholder="ชื่อผู้ใช้"><br>
+                            <input type="password" style="text-align: center;" class="form-control col-sm-6"
+                                id="searchtext2" name="searchtext2" placeholder="รหัสผ่าน">
+                            <br />
+                            <a>
+                                <h6 style="font-size:12px; text-align:center;" onclick="forget()"><u>ลืมรหัสผ่าน!!</u>
+                                </h6>
+                            </a>
+                        </div>
+                        <div class="mt-3 text-center">
+                            <button type="submit" class="btn bg-primary mb-2  text-white btnSubmit"><i
+                                    class="fa-solid fa-arrow-right-to-bracket"></i> เข้าสู่ระบบ</button>
+                            <button class="btn bg-primary  text-white  btnLoading d-none" type="button" disabled>
+                                <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                                Loading...
+                            </button>
+                        </div>
+                        <div class="mt-2 text-center">
+                            <span id="resp-spinner5" class="spinner-grow spinner-grow-sm text-danger d-none"
+                                role="status" aria-hidden="true"></span>
+                            <span id="resp-spinner6" class="spinner-grow spinner-grow-sm text-warning d-none"
+                                role="status" aria-hidden="true"></span>
+                            <span id="resp-spinner7" class="spinner-grow spinner-grow-sm text-info d-none" role="status"
+                                aria-hidden="true"></span>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div id="table" style="display:none">
+        <table id="search-results" class="mt-2" style="width:100%"></table>
+    </div>
+    <div class="container text-center">
+        <footer class="pt-3 mt-3 text-muted " style="font-size:12px">
+            <div class="footer-copyright py-2 mt-2"> ©
+                <script>
+                    document.write(new Date().getFullYear())
+                </script>
+                <a style="color:blue" href="https://www.facebook.com/kunTeerachanon" target="_blank">ธีรชานนท์
+                    พวงเงิน</a>
+            </div>
+        </footer>
+    </div>
+
+    <!--##JAVASCRIPT FUNCTIONS ---------------------------------------------------- -->
+    <script>
+        function forget() {
+            Swal.fire(
+                'ลืมรหัสผ่านหรอ ?',
+                'ลองผ่อนคลายและนึกรหัสผ่านของคุณให้ได้นะ',
+                'question'
+            )
+        }
+        function goback() {
+            Swal.fire({
+                position: 'top',
+                title: 'Are you sure Logout?',
+                text: "Do you really want to log out?!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#0d6efd',
+                cancelButtonColor: '#d33',
+                cancelButtonText: 'Cencel',
+                confirmButtonText: 'Yes sure'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    document.getElementById("page1").style.display = "block";
+                    document.getElementById("table").style.display = "none";
+                }
+            })
+        }
+
+        //PREVENT FORMS FROM SUBMITTING / PREVENT DEFAULT BEHAVIOUR
+        function preventFormSubmit() {
+            var forms = document.querySelectorAll('form');
+            for (var i = 0; i < forms.length; i++) {
+                forms[i].addEventListener('submit', function (event) {
+                    event.preventDefault();
+
+                });
+            }
+        }
+        window.addEventListener("load", preventFormSubmit, true);
+
+        //HANDLE FORM SUBMISSION
+        function handleFormSubmit(formObject) {
+
+            if (document.getElementById('searchtext').value == "" || document.getElementById('searchtext2').value == "") {
+
+                Swal.fire({
+                    position: 'top',
+                    icon: 'warning',
+                    title: 'กรุณากรอกชื่อผู้ใช้และรหัสผ่านให้ครบถ้วน',
+                    showConfirmButton: false,
+                    timer: 1500
+                })
+                document.getElementById("table").style.display = "none";
+
+            } else {
+                document.getElementById('resp-spinner5').classList.remove("d-none");
+                document.getElementById('resp-spinner6').classList.remove("d-none");
+                document.getElementById('resp-spinner7').classList.remove("d-none");
+                document.querySelector('.btnSubmit').classList.toggle('d-none');
+                document.querySelector('.btnLoading').classList.toggle('d-none');
+                google.script.run.withSuccessHandler(createTable).processForm(formObject);
+                document.getElementById("search-form").reset();
+            };
+        };
+
+        function createTable(dataArray) {
+            document.getElementById('resp-spinner5').classList.add("d-none");
+            document.getElementById('resp-spinner6').classList.add("d-none");
+            document.getElementById('resp-spinner7').classList.add("d-none");
+            document.querySelector('.btnSubmit').classList.toggle('d-none');
+            document.querySelector('.btnLoading').classList.toggle('d-none');
+
+            if (dataArray && dataArray !== undefined && dataArray.length != 0) {
+                document.getElementById("page1").style.display = "none";
+                document.getElementById("table").style.display = "block";
+
+                Swal.fire({
+                    position: 'top',
+                    icon: 'success',
+                    title: 'ยินดีต้อนรับ ' + '<br><h3 style="color:red" class="mt-3">' + dataArray[0][0] + '</h3>',
+                    showConfirmButton: false,
+                    timer: 1500
+                })
+                var result = "<table class='table table-sm table-striped' id='dtable' style='font-size:0.8em'>" +
+                    "<thead style='white-space: nowrap'>" + "</thead>" +
+                    "<tr>" +
+                    "<td colspan='2' style='text-align:center;color:red'>ยินดีต้อนรับ <b style='color:blue'> " + dataArray[0][0] + "</b></td>" +
+                    "</tr>" +
+                    "<tr>" +
+                    "<td colspan='2'><iframe width='100%' height='900' frameborder='0' scrolling='auto' src =" + dataArray[0][1] + "></iframe></td>" +
+                    "</tr>" +
+                    "</table>";
+
+                var div = document.getElementById('search-results');
+                div.innerHTML = result;
+
+            } else {
+
+                Swal.fire({
+                    position: 'top',
+                    icon: 'error',
+                    title: 'ชื่อผู้ใช้หรือรหัสผ่านผิด',
+                    showConfirmButton: false,
+                    timer: 1500
+                })
+                document.getElementById("table").style.display = "none";
+                document.getElementById("page1").style.display = "block";
+            }
+        }
+    </script>
+
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"
+        integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous">
+        </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"
+        integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous">
+        </script>
+
+</body>
+
+</html>
